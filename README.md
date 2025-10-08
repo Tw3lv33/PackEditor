@@ -21,7 +21,7 @@
 ---
 
 ### 3. Second Part – Biome Color Preview (available only for `foliagecolor.png` and `grasscolor.png`)
-- Dropdown list with biomes to select the display area – `ComboBox`
+- A tab to display the biome previews – `MenuItem`
 - `Dictionary<string, Int32Rect>` storing coordinates of areas (X, Y, Width, Height)
 - `CroppedBitmap` class cropping the selected area
 - `Image` displaying the cropped image

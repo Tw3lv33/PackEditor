@@ -8,7 +8,7 @@
 
 ---
 
-### 1. First Ribbon – Image Editor
+### 1. First Part – Image Editor
 - Loading files (.png) for further editing – using the `BitmapImage` class
 - Storing the image during editing – using the `WriteableBitmap` class
 - Graphic layer for editing – using the `Canvas` component that edits the `WriteableBitmap`
@@ -20,7 +20,7 @@
 
 ---
 
-### 3. Second Ribbon – Area Preview (available only for `foliagecolor.png` and `grasscolor.png`)
+### 3. Second Part – Biome Color Preview (available only for `foliagecolor.png` and `grasscolor.png`)
 - Dropdown list with biomes to select the display area – `ComboBox`
 - `Dictionary<string, Int32Rect>` storing coordinates of areas (X, Y, Width, Height)
 - `CroppedBitmap` class cropping the selected area

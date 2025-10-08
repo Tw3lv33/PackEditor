@@ -1,6 +1,6 @@
 ## PackEditor
 
-### Program Goal
+### Program Goals
 - Loading images for editing
 - Modification (drawing)
 - Saving images separately (.png) or as a test/main version (.zip)

@@ -1,22 +1,28 @@
-# PackEditor
-Cel programu:
-- Wczytywanie obrazów do edycji
-- Modyfikacja (rysowanie)
-- Zapis obrazu oddzielnie (.png) lub w wersji testowej/głównej (.zip)
-- Podgląd kolorów z ustalonych obszarów foliagecolor.png i grasscolor.png w menu
+## PackEditor
 
-1. Pierwszy Ribbon - Edytor obrazu:
-- Wczytywanie plików (.png) do dalszej edycji - Klasa BitmapImage
-- Przechowywanie obrazu na czas edycji - Klasa WriteableBitmap
-- Warstwa graficzna do edycji - Komponent Canvas edytujący WriteableBitmap
-- Historia edycji obrazu do ewentualnego cofnięcia - Stack<WriteableBitmap> przechowujący każdą edycje
-2. Zapis 
-- Komponent SaveFileDialog do zapisu zwykłego pliku .png
-- Zestaw klas System.IO do tworzenia folderów i biblioteka System.IO.Compression do kompresji gotowej paczki testowej do pliku .zip
+### Program Goal
+- Loading images for editing
+- Modification (drawing)
+- Saving images separately (.png) or as a test/main version (.zip)
+- Previewing colors from specific areas of `foliagecolor.png` and `grasscolor.png` in the menu
 
-3. Drugi Ribbon - Podgląd obszarów dostępny tylko dla plików foliagecolor.png i grasscolor.png
-- Lista rozwijana z listą biomów do ustalenia obszaru wyświetlenia- ComboBox
-- Dictionary<string, Int32Rect> do przechowywania współrzędnych obszarów (X, Y, Width i Height)
-- Klasa CroppedBitmap wycinająca wybrany obszar
-- Kontrolka Image wyświetlająca obraz wycięty przez CroppedImage
-- Grid umieszczający na szczycie wyciętego koloru półprzeźroczystą nakładkę textury bloku który będzie pod wpływem zmiany koloru
+---
+
+### 1. First Ribbon – Image Editor
+- Loading files (.png) for further editing – using the `BitmapImage` class
+- Storing the image during editing – using the `WriteableBitmap` class
+- Graphic layer for editing – using the `Canvas` component that edits the `WriteableBitmap`
+- History of image edits for possible undo – using `Stack<WriteableBitmap>` storing each edit
+
+### 2. Saving
+- `SaveFileDialog` component for saving a regular `.png` file
+- A set of classes from `System.IO` for creating folders and the `System.IO.Compression` library for compressing the final test package into a `.zip` file
+
+---
+
+### 3. Second Ribbon – Area Preview (available only for `foliagecolor.png` and `grasscolor.png`)
+- Dropdown list with biomes to select the display area – `ComboBox`
+- `Dictionary<string, Int32Rect>` storing coordinates of areas (X, Y, Width, Height)
+- `CroppedBitmap` class cropping the selected area
+- `Image` control displaying the cropped image
+- `Grid` placing a semi-transparent overlay of the block texture above the cropped color, which will be affected by color changes

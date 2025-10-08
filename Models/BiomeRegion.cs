@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace PackEditor.Models
 {
-    internal class BiomeRegion
+    public class BiomeRegion
     {
+        public string Name { get; set; }
+        public Int32Rect Region {  get; set; }
     }
 }

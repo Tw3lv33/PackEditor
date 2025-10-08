@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PackEditor.Models
+namespace PackEditor.Helpers
 {
-    public class ImageHistory
+    internal class PreviewVisibility
     {
-        
     }
 }

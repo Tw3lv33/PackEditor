@@ -7,6 +7,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <TextBlock Text="Preview View" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </Grid>
 </UserControl>

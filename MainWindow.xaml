@@ -5,8 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PackEditor"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        xmlns:views="clr-namespace:PackEditor.Views"
+
+        Title="PackEditor" Height="550" Width="1000">
+
     <Grid>
 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0">
+            <MenuItem Header="File">
+                <MenuItem Header="_Open"/>
+                <MenuItem Header="_Save"/>
+                <MenuItem Header="_Compress"/>
+                <Separator/>
+                <MenuItem Header="_Exit"/>
+            </MenuItem>
+            <MenuItem IsEnabled="False" Width="20" />
+            <MenuItem Header="Editor" Command="{Binding ShowEditorCommand}"/>
+            <MenuItem Header="Preview" Command="{Binding ShowPreviewCommand}"/>
+        </Menu>
+
+        <ContentControl Grid.Row="1" Content="{Binding CurrentView}" />
     </Grid>
 </Window>

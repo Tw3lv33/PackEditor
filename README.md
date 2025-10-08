@@ -16,7 +16,7 @@
 
 ### 2. Saving
 - `SaveFileDialog` component for saving a regular `.png` file
-- A set of classes from `System.IO` for creating folders and the `System.IO.Compression` library for compressing the final test package into a `.zip` file
+- `System.IO` for creating folders and `System.IO.Compression` for compressing the final test package into a `.zip` file
 
 ---
 
@@ -24,5 +24,5 @@
 - Dropdown list with biomes to select the display area – `ComboBox`
 - `Dictionary<string, Int32Rect>` storing coordinates of areas (X, Y, Width, Height)
 - `CroppedBitmap` class cropping the selected area
-- `Image` control displaying the cropped image
-- `Grid` placing a semi-transparent overlay of the block texture above the cropped color, which will be affected by color changes
+- `Image` displaying the cropped image
+- `Grid` placing a semi-transparent overlay of the block texture affected by color changes above the cropped color 

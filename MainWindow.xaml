@@ -9,6 +9,10 @@
 
         Title="PackEditor" Height="550" Width="1000">
 
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </Window.Resources>
+
     <Grid>
 
         <Grid.RowDefinitions>
@@ -26,7 +30,7 @@
             </MenuItem>
             <MenuItem IsEnabled="False" Width="20" />
             <MenuItem Header="Editor" Command="{Binding ShowEditorCommand}"/>
-            <MenuItem Header="Preview" Command="{Binding ShowPreviewCommand}"/>
+            <MenuItem Header="Preview" Command="{Binding ShowPreviewCommand}" IsEnabled="{Binding IsPreviewAvailable}"/>
         </Menu>
         
         <ContentControl Grid.Row="1" Content="{Binding CurrentView}" />

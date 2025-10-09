@@ -8,5 +8,6 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <TextBlock Text="Editor View" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Image Source="{Binding CurrentImage}" Stretch="None" />
     </Grid>
 </UserControl>

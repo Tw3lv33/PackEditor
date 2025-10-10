@@ -6,12 +6,14 @@ namespace PackEditor.Services
 {
     public static class ImageLoader
     {
+        //Image to edit and its filename without extension
         public class ImageResult
         {
             public WriteableBitmap Image { get; set; }
-            public string FileName { get; set; } // bez rozszerzenia
+            public string FileName { get; set; }
         }
 
+        //Open file dialog to load a PNG image and return it as a WriteableBitmap along with its filename
         public static ImageResult LoadImage()
         {
             var dialog = new OpenFileDialog()

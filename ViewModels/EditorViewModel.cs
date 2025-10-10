@@ -1,27 +1,26 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using CommunityToolkit.Mvvm.Input;
 using PackEditor.Models;
 
-
 namespace PackEditor.ViewModels
 {
     public partial class EditorViewModel : ObservableObject
     {
+        // Editable image and brush properties
         [ObservableProperty]
         private WriteableBitmap editableImage;
         [ObservableProperty]
         private int brushSize = 1;
 
-        
-
+        // Drawing state
         private bool isDrawing;
         private ImageHistory imageHistory = new();
         private Point lastPoint;
 
+        // Start a new drawing stroke
         public void StartDrawing(Point point)
         {
             if (EditableImage != null)
@@ -35,8 +34,7 @@ namespace PackEditor.ViewModels
             isDrawing = true;
         }
 
-
-
+        // Continue the drawing stroke
         public void ContinueDrawing(Point point)
         {
             if (!isDrawing || EditableImage == null) return;
@@ -45,8 +43,10 @@ namespace PackEditor.ViewModels
             lastPoint = point;
         }
 
+        // Stop the drawing stroke
         public void StopDrawing() => isDrawing = false;
 
+        // Function to draw a line using Bresenham's Algorithm
         private void DrawLine(Point p1, Point p2, Color color, int thickness)
         {
             int x0 = (int)p1.X;
@@ -73,6 +73,7 @@ namespace PackEditor.ViewModels
             EditableImage.Unlock();
         }
 
+        // Safely set a pixel color with boundary checks and thickness
         private void SetPixelSafe(WriteableBitmap bmp, int x, int y, Color color, int thickness = 1)
         {
             int half = thickness / 2;
@@ -93,6 +94,7 @@ namespace PackEditor.ViewModels
             }
         }
 
+        // Use the Redo functionality from ImageHistory
         [RelayCommand]
         private void Undo()
         {
@@ -104,6 +106,7 @@ namespace PackEditor.ViewModels
             }
         }
 
+        // Use the Redo functionality from ImageHistory
         [RelayCommand]
         private void Redo()
         {
@@ -115,9 +118,11 @@ namespace PackEditor.ViewModels
             }
         }
 
+        // Properties to indicate if undo/redo is possible
         public bool CanUndo => imageHistory.CanUndo;
         public bool CanRedo => imageHistory.CanRedo;
 
+        // HSL Color properties for the brush
         [ObservableProperty]
         private double brushHue = 0.0; // 0-360
 
@@ -127,8 +132,10 @@ namespace PackEditor.ViewModels
         [ObservableProperty]
         private double brushLightness = 0.5; // 0–1
 
+        // Property to get the current brush color in RGB
         public Color PreviewColor => HslToRgb(BrushHue, BrushSaturation, BrushLightness);
 
+        // Update the PreviewBrush when HSL values change
         partial void OnBrushHueChanged(double value)
         {
             OnPropertyChanged(nameof(PreviewBrush));
@@ -142,7 +149,7 @@ namespace PackEditor.ViewModels
             OnPropertyChanged(nameof(PreviewBrush));
         }
 
-
+        // Convert HSL to RGB color
         private Color HslToRgb(double h, double s, double l)
         {
             h /= 360.0;
@@ -160,6 +167,7 @@ namespace PackEditor.ViewModels
             return Color.FromRgb((byte)(r * 255), (byte)(g * 255), (byte)(b * 255));
         }
 
+        // Helper function for HSL to RGB conversion
         private double HueToRgb(double p, double q, double t)
         {
             if (t < 0) t += 1;
@@ -169,8 +177,11 @@ namespace PackEditor.ViewModels
             if (t < 2.0 / 3) return p + (q - p) * (2.0 / 3 - t) * 6;
             return p;
         }
+
+        // Property to get a SolidColorBrush for previewing the brush color
         public SolidColorBrush PreviewBrush => new SolidColorBrush(HslToRgb(BrushHue, BrushSaturation, BrushLightness));
 
+        // BrushSize stays within 1 to 8
         partial void OnBrushSizeChanged(int value)
         {
             if (value < 1) BrushSize = 1;

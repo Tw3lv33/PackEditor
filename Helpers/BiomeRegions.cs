@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.DirectoryServices.ActiveDirectory;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace PackEditor.Helpers
 {
-    //Biome Positions
+    //Static list of all biome positions
     public static class BiomeRegions
     {
         public static List<Models.BiomeRegion> All => new()

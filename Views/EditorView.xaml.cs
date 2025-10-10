@@ -8,10 +8,12 @@ namespace PackEditor.Views
 {
     public partial class EditorView : UserControl
     {
+        // Panning and zooming state
         private Point _panStart;
         private bool _isPanning = false;
         private double _zoom = 1.0;
 
+        // Constructor accepting the ViewModel
         public EditorView(EditorViewModel viewModel)
         {
             InitializeComponent();
@@ -19,9 +21,9 @@ namespace PackEditor.Views
 
             ImageCanvas.MouseWheel += ImageCanvas_MouseWheel;
         }
-
         private EditorViewModel ViewModel => (EditorViewModel)DataContext;
 
+        // Mouse event handlers for panning and drawing
         private void ImageCanvas_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.RightButton == MouseButtonState.Pressed)
@@ -37,6 +39,7 @@ namespace PackEditor.Views
             }
         }
 
+        // Mouse move event to handle panning and drawing
         private void ImageCanvas_MouseMove(object sender, MouseEventArgs e)
         {
             if (_isPanning && e.RightButton == MouseButtonState.Pressed)
@@ -55,6 +58,7 @@ namespace PackEditor.Views
             }
         }
 
+        // Mouse up event to stop panning or drawing
         private void ImageCanvas_MouseUp(object sender, MouseButtonEventArgs e)
         {
             if (_isPanning)
@@ -66,6 +70,7 @@ namespace PackEditor.Views
             ViewModel.StopDrawing();
         }
 
+        // Mouse wheel event to handle zooming
         private void ImageCanvas_MouseWheel(object sender, MouseWheelEventArgs e)
         {
             const double zoomFactor = 1.1;

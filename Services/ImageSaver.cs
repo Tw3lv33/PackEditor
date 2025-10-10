@@ -6,6 +6,7 @@ namespace PackEditor.Services
 {
     public static class ImageSaver
     {
+        //Save a WriteableBitmap as a PNG file using a save file dialog
         public static void SaveAsPng(WriteableBitmap bitmap, string defaultFileName = "Texture")
         {
             if (bitmap == null) return;

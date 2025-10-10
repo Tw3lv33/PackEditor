@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.Input;
 using PackEditor.ViewModels;
 using PackEditor.Views;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -11,6 +10,7 @@ namespace PackEditor.Models
 {
     public partial class MainViewModel : ObservableObject
     {
+        // Initialize with a dummy image for the editor view
         public MainViewModel()
         {
             var dummyBitmap = new WriteableBitmap(256, 256, 96, 96, PixelFormats.Bgra32, null);
@@ -18,19 +18,23 @@ namespace PackEditor.Models
             CurrentView = new EditorView(editorVM);
         }
 
-
+        // Current view being displayed (Editor or Preview)
         [ObservableProperty]
         private UserControl currentView;
 
+        // Currently loaded image
         [ObservableProperty]
         private WriteableBitmap currentImage;
 
+        // Filename of the currently loaded image
         [ObservableProperty]
         private string currentFileName;
 
+        // Whether the preview option is available based on the loaded image
         [ObservableProperty]
         private bool isPreviewAvailable;
 
+        // Command to switch to the editor view
         [RelayCommand]
         private void ShowEditor()
         {
@@ -44,10 +48,11 @@ namespace PackEditor.Models
             CurrentView = new EditorView(editorVM);
         }
 
-
+        // Command to switch to the biome preview view
         [RelayCommand]
         private void ShowPreview() => CurrentView = new BiomePreviewView();
 
+        // Command to load an image using the ImageLoader service
         [RelayCommand]
         private void LoadImage()
         {
@@ -59,10 +64,11 @@ namespace PackEditor.Models
 
                 IsPreviewAvailable = result.FileName == "foliagecolor" || result.FileName == "grasscolor";
 
-                ShowEditor(); // Load editor with the new image
+                ShowEditor();
             }
         }
 
+        // Command to save the current image as a PNG using the ImageSaver service
         [RelayCommand]
         private void SaveAsPng()
         {
@@ -73,12 +79,11 @@ namespace PackEditor.Models
             }
         }
 
+        // Command to exit the application
         [RelayCommand]
         private void Exit() 
         {
             System.Windows.Application.Current.Shutdown();
         }
-
-
     }
 }

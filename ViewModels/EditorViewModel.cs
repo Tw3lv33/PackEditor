@@ -15,9 +15,10 @@ namespace PackEditor.ViewModels
         [ObservableProperty]
         private int brushSize = 1;
 
+        public Action<WriteableBitmap>? OnImageChanged { get; set; }
         // Drawing state
         private bool isDrawing;
-        private ImageHistory imageHistory = new();
+        private readonly ImageHistory imageHistory = new();
         private Point lastPoint;
 
         // Start a new drawing stroke
@@ -27,11 +28,16 @@ namespace PackEditor.ViewModels
             {
                 imageHistory.Push(EditableImage);
                 OnPropertyChanged(nameof(CanUndo));
-                OnPropertyChanged(nameof(CanRedo));
             }
 
             lastPoint = point;
             isDrawing = true;
+        }
+        public EditorViewModel()
+        {
+            // Optionally push the initial image to history
+            if (EditableImage != null)
+                imageHistory.Push(EditableImage);
         }
 
         // Continue the drawing stroke
@@ -94,33 +100,31 @@ namespace PackEditor.ViewModels
             }
         }
 
-        // Use the Redo functionality from ImageHistory
+        // Use the Undo functionality from ImageHistory
         [RelayCommand]
         private void Undo()
         {
-            if (EditableImage != null && imageHistory.CanUndo)
-            {
-                EditableImage = imageHistory.Undo(EditableImage);
-                OnPropertyChanged(nameof(CanUndo));
-                OnPropertyChanged(nameof(CanRedo));
-            }
-        }
+            if (EditableImage == null || !imageHistory.CanUndo) return;
 
-        // Use the Redo functionality from ImageHistory
-        [RelayCommand]
-        private void Redo()
-        {
-            if (EditableImage != null && imageHistory.CanRedo)
-            {
-                EditableImage = imageHistory.Redo(EditableImage);
-                OnPropertyChanged(nameof(CanUndo));
-                OnPropertyChanged(nameof(CanRedo));
-            }
+            var previousImage = imageHistory.Undo(EditableImage);
+            EditableImage = previousImage;
+            OnImageChanged?.Invoke(EditableImage);
         }
 
         // Properties to indicate if undo/redo is possible
         public bool CanUndo => imageHistory.CanUndo;
-        public bool CanRedo => imageHistory.CanRedo;
+        
+        public void ApplyEdit(WriteableBitmap newImage)
+        {
+            imageHistory.Push(EditableImage);
+            EditableImage = newImage;
+            OnImageChanged?.Invoke(EditableImage); 
+        }
+        public void InitializeHistory()
+        {
+            if (EditableImage != null)
+                imageHistory.Push(EditableImage);
+        }
 
         // HSL Color properties for the brush
         [ObservableProperty]

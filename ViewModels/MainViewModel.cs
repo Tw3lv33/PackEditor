@@ -24,7 +24,7 @@ namespace PackEditor.Models
 
         // Currently loaded image
         [ObservableProperty]
-        private WriteableBitmap currentImage;
+        public WriteableBitmap currentImage;
 
         // Filename of the currently loaded image
         [ObservableProperty]
@@ -42,11 +42,14 @@ namespace PackEditor.Models
 
             var editorVM = new EditorViewModel
             {
-                EditableImage = CurrentImage
+                EditableImage = CurrentImage,
+                OnImageChanged = updatedImage => CurrentImage = updatedImage
             };
-
+            editorVM.InitializeHistory(); // Push initial image to history
             CurrentView = new EditorView(editorVM);
+
         }
+
 
         // Command to switch to the biome preview view
         [RelayCommand]

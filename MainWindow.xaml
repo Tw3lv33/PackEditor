@@ -23,7 +23,7 @@
             <MenuItem Header="File">
                 <MenuItem Header="_Open Image" Command="{Binding LoadImageCommand}"/>
                 <MenuItem Header="_Save As PNG" Command="{Binding SaveAsPngCommand}"/>
-                <MenuItem Header="_Export Pack" Command="{Binding ExportPackCommand}"/>
+                <MenuItem Header="_Export Pack" Command="{Binding ExportAsZipCommand}"/>
                 <Separator/>
                 <MenuItem Header="_Exit" Command="{Binding ExitCommand}"/>
             </MenuItem>

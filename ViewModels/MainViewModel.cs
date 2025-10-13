@@ -82,6 +82,18 @@ namespace PackEditor.Models
             }
         }
 
+        // Command to export the current image as a PNG inside a ZIP using the ZipExporter service
+        [RelayCommand]
+        private void ExportAsZip()
+        {
+            if (CurrentImage != null)
+            {
+                var fileName = string.IsNullOrWhiteSpace(CurrentFileName) ? "Texture" : CurrentFileName;
+                Services.ZipExporter.ExportAsZip(CurrentImage, fileName);
+            }
+        }
+
+
         // Command to exit the application
         [RelayCommand]
         private void Exit() 

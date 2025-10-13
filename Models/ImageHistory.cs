@@ -11,7 +11,6 @@ namespace PackEditor.Models
         public void Push(WriteableBitmap image)
         {
             undoStack.Push(Clone(image));
-
         }
 
         //Undo the last action and return the previous image state

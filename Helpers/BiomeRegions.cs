@@ -8,6 +8,8 @@ namespace PackEditor.Helpers
         public static List<Models.BiomeRegion> All => new()
         {
             new Models.BiomeRegion { Name = "Forest", Region = new Int32Rect(0, 16, 16, 16)}, //Placeholder
+            new Models.BiomeRegion { Name = "Desert", Region = new Int32Rect(0, 240, 16, 16)}, //Placeholder
+            new Models.BiomeRegion { Name = "Taiga", Region = new Int32Rect(16, 0, 16, 16)}, //Placeholder
         };
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PackEditor.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,12 @@ namespace PackEditor.Views
     /// </summary>
     public partial class BiomePreviewView : UserControl
     {
+        public PreviewViewModel ViewModel { get; } = new();
+
         public BiomePreviewView()
         {
             InitializeComponent();
+            DataContext = ViewModel;
         }
     }
 }

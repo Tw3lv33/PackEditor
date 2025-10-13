@@ -53,7 +53,20 @@ namespace PackEditor.Models
 
         // Command to switch to the biome preview view
         [RelayCommand]
-        private void ShowPreview() => CurrentView = new BiomePreviewView();
+        private void ShowPreview()
+        {
+            if (CurrentImage == null) return;
+
+            var previewVM = new PreviewViewModel();
+            previewVM.LoadCrops(CurrentImage);
+
+            var previewView = new BiomePreviewView
+            {
+                DataContext = previewVM
+            };
+
+            CurrentView = previewView;
+        }
 
         // Command to load an image using the ImageLoader service
         [RelayCommand]

@@ -29,7 +29,7 @@
             </MenuItem>
             <MenuItem IsEnabled="False" Width="20" />
             <MenuItem Header="Editor" Command="{Binding ShowEditorCommand}"/>
-            <MenuItem Header="Preview" Command="{Binding ShowPreviewCommand}" IsEnabled="{Binding IsPreviewAvailable}"/>
+            <MenuItem Header="Preview" Command="{Binding ShowPreviewCommand}" IsEnabled="{Binding IsPreviewAvailable}" ToolTipService.ShowOnDisabled="True" ToolTip="Biome color file required"/>
         </Menu>
         
         <ContentControl Grid.Row="1" Content="{Binding CurrentView}" />
